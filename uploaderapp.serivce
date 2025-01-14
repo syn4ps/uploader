@@ -1,0 +1,12 @@
+[Unit]
+Description=Gunicorn instance for uploader app
+After=network.target
+
+[Service]
+WorkingDirectory=/var/www/uploader/uploader
+ExecStart=/bin/poetry run gunicorn -w 4 -b 0.0.0.0:18000 uploader.wsgi:app
+Restart=always
+Environment=PATH=/opt/poetry/venv/bin
+
+[Install]
+WantedBy=multi-user.target
